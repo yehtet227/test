@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  @layer utilities {
+    @variants responsive {
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      .no-scrollbar {
+          -ms-overflow-style: none;  
+          scrollbar-width: none;  
+      }
+
+      .scrollbar-y-none::-webkit-scrollbar-thumb {
+        display: none;
+      }
+  
+      .scrollbar-y-none::-webkit-scrollbar-track {
+        display: none;
+      }
+  
+      .scrollbar-y-none {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+  
+      .scrollbar-y-none {
+        -ms-overflow-style: none;
+      }
+    }
+  }

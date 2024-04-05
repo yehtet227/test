@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+    web:
+        container_name: 'its-mgt-front'
+        build:
+            context: .
+        ports:
+            - '3000:3000'
+        volumes:
+            - .:/var/www

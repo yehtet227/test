@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front-web
+  template:
+    metadata:
+      labels:
+        app: front-web
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: ip-10-205-95-190.ec2.internal
+      containers:
+      - name: front-web
+        image: 305696025533.dkr.ecr.us-east-1.amazonaws.com/gic-dx-its-mgt-front:latest
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "1"
+        ports:
+        - containerPort: 3000
+        env:
+        - name: API_GATEWAY_SERVICE_SERVICE_HOST
+          value: api-gateway-service

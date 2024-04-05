@@ -1,0 +1,23 @@
+.table-container {
+    max-height: 90vh;
+    overflow-x: scroll; 
+    white-space: nowrap;
+    position: relative;
+  }
+  
+  .table-container > table {
+    width: max-content;
+    min-width: 100%;
+  }
+  
+  .table-scroll-filler {
+    width: 100%;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  

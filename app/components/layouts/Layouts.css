@@ -1,0 +1,20 @@
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+
+.sidebar-collapsed {
+    width: 4.5%; /* equivalent to 'w-2/24' */
+    transition: width 0.5s ease-in-out;
+  }
+  
+  .sidebar-expanded {
+    width: 13rem; /* equivalent to 'w-52' */
+    transition: width 0.5s ease-in-out;
+  }

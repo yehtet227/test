@@ -1,0 +1,76 @@
+{
+    "name": "its-tools-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "husky": {
+        "hooks": {
+            "pre-push": "pnpm run format && pnpm run commit"
+        }
+    },
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "format": "prettier --write .",
+        "commit": "simple-commit-message",
+        "prepare": "husky install"
+    },
+    "dependencies": {
+        "@commitlint/config-conventional": "^18.4.3",
+        "@formatjs/intl-localematcher": "^0.5.2",
+        "@headlessui/react": "^1.7.17",
+        "@heroicons/react": "^2.0.18",
+        "@hookform/resolvers": "^3.3.2",
+        "@reactusehooks/core": "^1.1.2",
+        "@reduxjs/toolkit": "^1.9.7",
+        "@tanstack/react-query": "^4.33.0",
+        "@tanstack/react-query-devtools": "^4.33.0",
+        "@tanstack/react-query-next-experimental": "5.8.7",
+        "autoprefixer": "10.4.16",
+        "axios": "^1.6.2",
+        "clsx": "^2.0.0",
+        "eslint": "8.56.0",
+        "eslint-config-next": "14.0.4",
+        "its-tools-frontend": "link:",
+        "negotiator": "^0.6.3",
+        "next": "14.0.4",
+        "postcss": "8.4.32",
+        "react": "18.2.0",
+        "react-datepicker": "^4.24.0",
+        "react-dom": "18.2.0",
+        "react-google-charts": "^4.0.1",
+        "react-hook-form": "^7.49.2",
+        "react-hot-toast": "^2.4.1",
+        "react-query": "^3.39.3",
+        "react-redux": "^8.1.3",
+        "redux-persist": "^6.0.0",
+        "sharp": "^0.33.1",
+        "simple-commit-message": "^4.1.3",
+        "tailwindcss": "3.3.6",
+        "yup": "^1.3.2"
+    },
+    "devDependencies": {
+        "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+        "@tanstack/eslint-plugin-query": "^5.12.1",
+        "husky": "^8.0.3",
+        "prettier": "^3.1.1",
+        "prettier-plugin-tailwindcss": "^0.5.9"
+    },
+    "pnpm": {
+        "overrides": {
+            "moment-timezone@>=0.1.0 <0.5.35": ">=0.5.35",
+            "lodash@<4.17.20": ">=4.17.20",
+            "moment@<2.29.2": ">=2.29.2",
+            "moment@>=2.18.0 <2.29.4": ">=2.29.4",
+            "lodash@<4.17.21": ">=4.17.21",
+            "minimist@<0.2.1": ">=0.2.1",
+            "semver@<5.7.2": ">=5.7.2",
+            "word-wrap@<1.2.4": ">=1.2.4",
+            "minimist@<0.2.4": ">=0.2.4",
+            "debug@>=3.2.0 <3.2.7": ">=3.2.7",
+            "zod@<=3.22.2": ">=3.22.3",
+            "postcss@<8.4.31": ">=8.4.31"
+        }
+    }
+}
