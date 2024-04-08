@@ -17,7 +17,7 @@ jobs:
           with:
             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: ${{ env.AWS_DEFAULT_REGION}}
+            aws-region: ${{ vars.AWS_DEFAULT_REGION}}
             
         - name: Build Docker image
           env:
@@ -25,15 +25,15 @@ jobs:
           run: |
             DOCKER_TAG=$(echo "${GITHUB_REF}" | cut -d'/' -f 3)
             docker build -t gic-dx-its-mgt-front:$IMAGE_TAG .
-            docker tag gic-dx-its-mgt-front:$IMAGE_TAG ${{ env.ECR_REPOSITORY }}:${DOCKER_TAG}
-            docker tag gic-dx-its-mgt-front:$IMAGE_TAG ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
+            docker tag gic-dx-its-mgt-front:$IMAGE_TAG ${{ vars.ECR_REPOSITORY }}:${DOCKER_TAG}
+            docker tag gic-dx-its-mgt-front:$IMAGE_TAG ${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG
 
         - name: Authenticate to Amazon ECR
           run: |
-            aws ecr get-login-password --region ${{ env.AWS_DEFAULT_REGION}} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
+            aws ecr get-login-password --region ${{ vars.AWS_DEFAULT_REGION}} | docker login --username AWS --password-stdin ${{ vars.ECR_REGISTRY }}
 
         - name: Push Docker image to Amazon ECR
           run: |
             DOCKER_TAG=$(echo "${GITHUB_REF}" | cut -d'/' -f 3)
-            docker push ${{ env.ECR_REPOSITORY }}:${DOCKER_TAG}
-            docker push ${{ env.ECR_REPOSITORY }}:latest
+            docker push ${{ vars.ECR_REPOSITORY }}:${DOCKER_TAG}
+            docker push ${{ vars.ECR_REPOSITORY }}:latest
