@@ -30,7 +30,7 @@ jobs:
 
         - name: Authenticate to Amazon ECR
           run: |
-            aws ecr get-login-password --region ${{ vars.AWS_DEFAULT_REGION}} | docker login --username AWS --password-stdin ${{ vars.ECR_REGISTRY }}
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ vars.ECR_REGISTRY }}
 
         - name: Push Docker image to Amazon ECR
           run: |
