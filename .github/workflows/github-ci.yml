@@ -3,37 +3,25 @@ name: "First CI/CD with GitHub"
 on:
   push:
     tags:
-    - 'v*'    
+    - 'v1.*' 
+    - 'v2.*' 
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Tag Version
+        id: check_tag
+        run: echo "Tag is ${{ github.ref }}"
+      
+      - name: Deploy to Production
+        if: startsWith(github.ref, 'refs/tags/v1.')  # Example condition
+        run: |
+          echo "Deploying version ${{ github.ref }}"
+          # Add your deployment script for production here
 
-        steps:
-        - name: Checkout repository
-          uses: actions/checkout@v2
-        - name: Configure AWS credentials
-          uses: aws-actions/configure-aws-credentials@v2
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: ${{ vars.AWS_DEFAULT_REGION}}
-            
-        - name: Build Docker image
-          env:
-            IMAGE_TAG: latest
-          run: |
-            DOCKER_TAG=$(echo "${GITHUB_REF}" | cut -d'/' -f 3)
-            docker build -t gic-dx-its-mgt-front:$IMAGE_TAG .
-            docker tag gic-dx-its-mgt-front:$IMAGE_TAG ${{ vars.ECR_REPOSITORY }}:${DOCKER_TAG}
-            docker tag gic-dx-its-mgt-front:$IMAGE_TAG ${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG
-
-        - name: Authenticate to Amazon ECR
-          run: |
-            aws ecr get-login-password --region ${{ vars.AWS_DEFAULT_REGION}} | docker login --username AWS --password-stdin ${{ vars.ECR_REGISTRY }}
-
-        - name: Push Docker image to Amazon ECR
-          run: |
-            DOCKER_TAG=$(echo "${GITHUB_REF}" | cut -d'/' -f 3)
-            docker push ${{ vars.ECR_REPOSITORY }}:${DOCKER_TAG}
-            docker push ${{ vars.ECR_REPOSITORY }}:latest
+      - name: Deploy to Staging
+        if: startsWith(github.ref, 'refs/tags/v2.')  # Example condition
+        run: |
+          echo "Deploying staging version ${{ github.ref }}"
+          # Add your deployment script for staging here
